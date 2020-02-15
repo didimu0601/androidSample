@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>테스트용 로컬 html문서</title>
+        <script>
+            var jsFuncFromObjc = function(){
+                alert("func1 is called.");
+            }
+        
+            var objcFuncLogin = function(){
+                //alert("welcome here");
+                window.location = "ddulotto://login?type=kakao";
+            }
+             var objcFuncLogout = function(){
+                //alert("welcome here");
+                window.location = "ddulotto://logout";
+            }
+
+             var objcFuncSetting = function(){
+                //alert("welcome here");
+                window.location = "ddulotto://settings";
+            }
+
+            var sampleMethod = function(){
+                alert("method is called");
+            }
+        
+            var changeDocument = function(){
+                var titleList = ["Hello world","Bye world"];
+ 
+                var title = document.getElementById("titleName");
+                var curTitle = title.innerText;
+                
+                if(curTitle == titleList[0]){
+                    title.innerText = titleList[1];
+                } else{
+                    title.innerText = titleList[0];
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <p>웹페이지</p>
+        
+        <p id="titleName">Native Tests</p>
+        <input type="button" value="logincall" onClick="objcFuncLogin()"/><p id="titleName"></p>
+        <input type="button" value="logoutcall" onClick="objcFuncLogout()"/><p id="titleName"></p>
+        <input type="button" value="setting call" onClick="objcFuncSetting()"/><p id="titleName"></p>
+    </body>
+</html> 

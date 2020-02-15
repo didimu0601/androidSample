@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "886143784649",
+    "firebase_url": "https://ulotto-d61c7.firebaseio.com",
+    "project_id": "ulotto-d61c7",
+    "storage_bucket": "ulotto-d61c7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:886143784649:android:589a9901374880f371df18",
+        "android_client_info": {
+          "package_name": "kr.co.didimu.ulotto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "886143784649-no1ogcjt4n7fgthu2e83mdmsrnar7vna.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kr.co.didimu.ulotto",
+            "certificate_hash": "d3d523a3151b7f74c6a2d58e28c28ce932f28b37"
+          }
+        },
+        {
+          "client_id": "886143784649-6qlfjoetq0t6qlq84l5nglm0tadf3rte.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCElnUzhqZ4r6cjCGbkJiw9FPAolOytitk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "886143784649-6qlfjoetq0t6qlq84l5nglm0tadf3rte.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

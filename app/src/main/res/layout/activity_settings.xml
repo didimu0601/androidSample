@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical">
+
+    <TextView android:id="@+id/text_finish"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/action_finish"
+            android:textSize="@dimen/content_font_big_size"
+            android:textStyle="bold"
+            android:onClick="onClick"
+            android:layout_margin="@dimen/default_margin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView android:id="@+id/text_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_settings"
+            android:textSize="@dimen/content_font_big_size"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBaseline_toBaselineOf="@+id/text_finish" />
+
+    <View  android:id="@+id/view_line_1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_big_size"
+            android:background="@color/color_eeeeee"
+            android:layout_margin="@dimen/default_margin"
+            app:layout_constraintTop_toBottomOf="@+id/text_finish"/>
+
+    <TextView android:id="@+id/text_use_bio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/use_bio_login"
+            android:textSize="@dimen/content_font_size"
+            android:textStyle="bold"
+            android:layout_margin="@dimen/default_margin"
+            app:layout_constraintTop_toBottomOf="@+id/view_line_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/switch_use_bio"
+            app:layout_constraintHorizontal_chainStyle="spread_inside" />
+
+    <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_use_bio"
+            style="@style/CustomSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            app:switchPadding="@dimen/switch_padding"
+            app:layout_constraintStart_toEndOf="@+id/text_use_bio"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBaseline_toBaselineOf="@+id/text_use_bio" />
+
+    <View  android:id="@+id/view_line_2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_size"
+            android:background="@color/color_eeeeee"
+            android:layout_margin="@dimen/default_margin"
+            app:layout_constraintTop_toBottomOf="@+id/text_use_bio"/>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_use_bio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="text_use_bio,switch_use_bio,view_line_2"/>
+
+    <TextView
+        android:id="@+id/text_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:layout_marginTop="16dp"
+        android:text="@string/title_version"
+        android:textSize="@dimen/content_font_size"
+        android:textStyle="bold"
+        android:onClick="onClick"
+        app:layout_constraintEnd_toStartOf="@+id/barrier_version"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_line_2" />
+
+    <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="start"
+            app:layout_constraintStart_toEndOf="@+id/text_version"
+            app:constraint_referenced_ids="button_update"/>
+
+    <TextView android:id="@+id/text_new_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/content_font_small_size"
+            android:text="@string/msg_new_version"
+            android:layout_margin="@dimen/default_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBaseline_toBaselineOf="@+id/text_version"/>
+
+    <Button android:id="@+id/button_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_update"
+            android:textSize="@dimen/content_font_small_size"
+            android:textColor="@color/color_ffffff"
+            android:background="@color/color_32485e"
+            android:layout_margin="@dimen/default_margin"
+            android:padding="@dimen/default_button_text_padding"
+            android:onClick="onClick"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBaseline_toBaselineOf="@+id/text_version"/>
+
+    <View  android:id="@+id/view_line_3"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_size"
+            android:background="@color/color_eeeeee"
+            android:layout_margin="@dimen/default_margin"
+            app:layout_constraintTop_toBottomOf="@+id/text_version"/>
+    <FrameLayout
+        android:id="@+id/layout_test_setting"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

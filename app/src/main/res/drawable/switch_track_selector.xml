@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="false">
+        <shape android:dither="true" android:shape="rectangle" android:useLevel="false" android:visible="true">
+            <solid android:color="@color/color_cccccc" />
+            <corners android:bottomLeftRadius="@dimen/switch_radius" android:bottomRightRadius="@dimen/switch_radius" android:topLeftRadius="@dimen/switch_radius" android:topRightRadius="@dimen/switch_radius" />
+        </shape>
+    </item>
+    <item android:state_checked="true">
+        <shape android:dither="true" android:shape="rectangle" android:useLevel="false" android:visible="true">
+            <solid android:color="@color/color_3073FF" />
+            <corners android:bottomLeftRadius="@dimen/switch_radius" android:bottomRightRadius="@dimen/switch_radius" android:topLeftRadius="@dimen/switch_radius" android:topRightRadius="@dimen/switch_radius" />
+        </shape>
+    </item>
+</selector>

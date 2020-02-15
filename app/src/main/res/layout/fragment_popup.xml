@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <kr.co.didimu.ulotto.web.CustomWebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"/>
+
+    <ImageView android:id="@+id/image_logo"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:padding="4dp"
+            android:background="@color/color_32485e"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView android:id="@+id/text_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="&lt;"
+            android:textColor="@color/color_ffffff"
+            android:textSize="@dimen/content_font_big_size"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:onClick="onClick"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBaseline_toBaselineOf="@+id/image_logo"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

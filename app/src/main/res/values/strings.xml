@@ -1,0 +1,80 @@
+<resources>
+    <string name="app_name">ULotto</string>
+    <string name="app_copyright">© DidimU all rights reserved.</string>
+    <string name="input_id_hint">아이디</string>
+    <string name="input_pw_hint">비밀번호</string>
+    <string name="action_login">LOGIN</string>
+    <string name="action_next">다음</string>
+    <string name="action_disagree">거부</string>
+    <string name="action_agree">동의</string>
+    <string name="use_bio_login">지문 로그인</string>
+    <string name="save_id">아이디저장</string>
+    <string name="auto_login">자동로그인</string>
+    <string name="find_id">아이디 찾기</string>
+    <string name="find_pw">비밀번호 찾기</string>
+    <string name="contact_us">사용문의</string>
+    <string name="msg_wrong_login">입력하신 정보가 일치하지 않습니다.\n확인후 다시 입력해 주세요.</string>
+    <string name="msg_must_login">정상적인 앱 사용은 로그인 후 가능합니다.\n로그인을 계속 진행하시겠습니까?</string>
+    <string name="msg_force_update_application">계속 진행하려면 앱 업데이트가 필요합니다.\n업데이트 하시겠습니까?</string>
+    <string name="msg_update_application">새로운 버전이 있습니다.\n업데이트 하시겠습니까?</string>
+    <string name="msg_finish_application">\'뒤로\' 버튼을 한번 더 누르면 종료됩니다.</string>
+    <string name="title_permission_info">앱 접근권한 안내</string>
+    <string name="permission_desc">\'설정\' - \'애플리케이션\' - 를 통해 접근권한을 재 설정하실 수 있습니다.</string>
+    <string name="title_privacy_info">모바일 정보보호 동의</string>
+    <string name="msg_http_fail">서버와의 통신이 원활하지 않습니다.\n잠시 후 다시 접속해주세요.</string>
+    <string name="msg_download_file">해당 파일을 다운로드 하시겠습니까?</string>
+    <string name="title_login">로그인</string>
+    <string name="msg_terms_warning_not_agree">정보보호 서약에 동의하지\n않는 경우, 정상적인 앱\n사용이 불가능합니다.</string>
+    <string name="action_input_login">아이디 / 비밀번호 로그인 > </string>
+    <string name="action_cancel">취소</string>
+    <string name="action_finish_application">앱 종료</string>
+    <string name="title_prompt_login">지문로그인 하시려면 터치해 주세요</string>
+    <string name="msg_fingerprint">지문인식</string>
+    <string name="touch_fingerprint">지문 센서에 손가락을 올려주세요.</string>
+    <string name="msg_match_fingerprint">지문인식이 완료되었습니다.</string>
+    <string name="msg_not_match_many_times">불 일치 횟수가 많습니다. 30초 후 다시 시도하세요.</string>
+    <string name="msg_not_match_permanent_lock">실패 횟수 초과로 인하여 지문인식이 비 활성화 되었습니다. 일반 로그인을 사용하세요.</string>
+    <string name="msg_unavailable_prompt_login">등록된 지문 정보가 없습니다.\n지문 정보를 먼저 등록해 주세요.\n지문은 \'설정 > Touch ID 및 암호\'에서\n등록 가능합니다.</string>
+    <string name="msg_not_match_fingerprint">지문이 일치하지 않습니다.</string>
+    <string name="msg_empty_id">아이디를 입력해 주세요.</string>
+    <string name="msg_empty_pw">패스워드를 입력해 주세요.</string>
+    <string name="msg_bio_guide">지문센서에 손가락을 올려주세요.</string>
+    <string name="msg_bio_help_partial">지문 전체를 인식시켜 주세요.</string>
+    <string name="msg_bio_help_insufficient">지문을 인식할 수 없습니다. 다시 시도하여 주세요.</string>
+    <string name="msg_bio_help_dirty">센서 위의 이물질을 제거한 후, 시도하여 주세요.</string>
+    <string name="msg_bio_help_too_fast">손가락을 천천히 인식시켜 주세요.</string>
+    <string name="msg_bio_help_too_slow">손가락을 빠르게 움직여 인식시켜 주세요.</string>
+    <string name="title_sign_up">회원 가입 안내</string>
+    <string name="msg_sing_up">회원가입은 홈페이지를 이용해주세요.</string>
+    <string name="action_finish">&lt;</string>
+    <string name="title_settings">설정</string>
+    <string name="title_version">현재 앱 버전 %s</string>
+    <string name="action_update">최신버전 업데이트</string>
+    <string name="msg_new_version">최신버전입니다.</string>
+
+    <string name="html_permission_info">
+        <![CDATA[
+        <b>접근권한</><p/>
+        <small>&nbsp; 연락처사용 <br/>
+        &nbsp;&nbsp;&nbsp;- 연락처를 이용한 전화걸기에 사용됩니다.<br/></small>
+        ]]>
+    </string>
+    <string name="html_privacy_info">
+        <![CDATA[
+        ・ 1. 정보보호정책의 제반 규정을 준수하며, 계정/권한 기기관리 미흡에 따른 보안사고 발생시 모든 책임을 감수하며, 단말기 분실 시 관리자에게 즉각 통지할 것에 동의합니다.<p/>
+        ・ 2. 회사의 정보보호 정책의 목적 상 필요하다고 인정되는 상당한 사유가 있을 경우, 회사는 신청자의 사용 내역 및 첨부파일 등을 기록하고, 보안사고 예방 및 원인 분석을 위해 사용할 수 있습니다.<p/>
+        ・ 3. 계정 및 단말기를 타인에게 공유, 양도하지 않으며, 부여된 권한은 업무적으로만 사용합니다.
+        ]]>
+    </string>
+    <string name="html_contact_us">
+        <![CDATA[
+        <br/>
+        <b>박상기 님</b><br/><br/><br/>
+         service@digimu.com<br/>
+        <br/>
+         02-1234-5678<br/><br/>
+        <br/>
+
+        ]]>
+    </string>
+</resources>
