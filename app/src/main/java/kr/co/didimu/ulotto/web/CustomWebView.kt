@@ -41,7 +41,7 @@ class CustomWebView @JvmOverloads constructor(
         var userAgent = settings.getUserAgentString();
 
         //settings.setUserAgentString(userAgent + " APP_DIDIMU_Android")
-        settings.setUserAgentString(userAgent + " DDU-lotto")
+        settings.setUserAgentString("DDU-lotto/" + userAgent)
 
 
         //Enable 3rd party cookie, Disable하면 보안 키패드가 생성 안됨.
@@ -58,7 +58,7 @@ class CustomWebView @JvmOverloads constructor(
         //Image Resizing to fit screen width
         settings.loadWithOverviewMode = true
 //        settings.setRenderPriority(WebSettings.RenderPriority.HIGH)
-        settings.userAgentString = Utils.getUserAgent(context)
+        //settings.userAgentString = Utils.getUserAgent(context) // 해당부분은 필요없을듯 합니다. 위에 셋팅을 한번 한거 같은데요
 
         //20191023 psg : 릴리즈 후에도 웹 디버깅 가능하도록 임시로 해
 //        if (BuildConfig.DEBUG) {

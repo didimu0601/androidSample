@@ -156,7 +156,7 @@ class MainActivity : BaseActivity(), Main.View, Handler.Callback {
 
 //                    webview.loadUrl("${ServerType.webUrl}searchresult?q=${matches?.get(0)}")
 //                var urlLoginParam = "${ServerType.webUrl}/_Ext/sns/kakao/kakaoLogin.php?userid=${idStr}&usernm=${nameStr}&email=${emailStr}"
-                var urlLoginParam = "${ServerType.webUrl}/_Ext/sns/kakao/kakaoLogin.php?userid=${id64Str}&usernm=${name64Str}&email=${email64Str}"
+                var urlLoginParam = "${ServerType.webUrl}/_Ext/sns/kakao/kakaoLoginApp.php?userid=${id64Str}&usernm=${name64Str}&email=${email64Str}"
 
                 webview.loadUrl(urlLoginParam)
                 PrintLog.d(TAG, "login kakao  = ${urlLoginParam}")

@@ -22,7 +22,7 @@ class HBFcmService : FirebaseMessagingService() {
      */
     override fun onNewToken(token: String) {
         Log.d(TAG, "new Token: $token")
-        sendRegistrationToServer(token)
+        //sendRegistrationToServer(token)
     }
 
     /**
