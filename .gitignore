@@ -1,0 +1,13 @@
+# ignore all files in the build/ directory
+build/
+
+# idea
+.idea/
+
+.gradle/
+
+*.iml
+
+local.properties
+
+.DS_Store
