@@ -64,6 +64,12 @@ enum class Scheme(private val host: String) {
                         return true
                     }else if(typeParam.equals("naver", ignoreCase = true)){
                         PrintLog.d(TAG, "scheme login naver")
+
+                        val msg = Message.obtain()
+                        msg?.what = Constants.NAVER_NOUI_LOGIN
+
+                        MessageHandler(context, context as Handler.Callback).sendMessage(msg)
+
                         return true
                     }
                     else {

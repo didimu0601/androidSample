@@ -70,3 +70,6 @@
   public *;
 }
 -dontwarn android.support.v4.**,org.slf4j.**,com.google.android.gms.**
+-keep public class com.nhn.android.naverlogin.** {
+       public protected *;
+}

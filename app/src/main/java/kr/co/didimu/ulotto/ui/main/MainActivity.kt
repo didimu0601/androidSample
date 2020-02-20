@@ -13,9 +13,12 @@ import android.util.Base64
 import android.util.Log
 import android.view.ViewGroup
 import android.webkit.CookieManager
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
+import com.nhn.android.naverlogin.OAuthLogin
+import com.nhn.android.naverlogin.OAuthLoginHandler
 import kotlinx.android.synthetic.main.activity_main.*
 import kr.co.didimu.ulotto.BaseActivity
 import kr.co.didimu.ulotto.R
@@ -95,6 +98,7 @@ class MainActivity : BaseActivity(), Main.View, Handler.Callback {
             e.printStackTrace()
         }
 
+        initNaverData()
 
     }
 
@@ -245,8 +249,65 @@ class MainActivity : BaseActivity(), Main.View, Handler.Callback {
                     PermissionType.AUDIO.getPermissionList(),
                     Constants.PERMISSION_AUDIO)
             }
+
+            Constants.NAVER_NOUI_LOGIN -> { //naver login
+                PrintLog.d(TAG, "naver Login")
+                doNaverLogin()
+            }
+
         }
         return true
+    }
+
+//    private val OAUTH_CLIENT_ID = "Fr9EplM4caqhSqrNOrri"
+    private val OAUTH_CLIENT_ID = "pFVJ12VZ0FMZakZkUsYF"
+
+    private val OAUTH_CLIENT_SECRET = "ktHfFRmz4n"
+//    private val OAUTH_CLIENT_SECRET = "i_2m_ej_PL"
+    private val OAUTH_CLIENT_NAME = "ULotto"
+
+    private var mOAuthLoginInstance: OAuthLogin? = null
+
+    private fun initNaverData(){
+        mOAuthLoginInstance = OAuthLogin.getInstance()
+        mOAuthLoginInstance?.init(
+            this@MainActivity
+            ,OAUTH_CLIENT_ID
+            ,OAUTH_CLIENT_SECRET
+            ,OAUTH_CLIENT_NAME
+
+        )
+    }
+
+    /**
+     * startOAuthLoginActivity() 호출시 인자로 넘기거나, OAuthLoginButton 에 등록해주면 인증이 종료되는 걸 알 수 있다.
+     */
+    private val mOAuthLoginHandler = object : OAuthLoginHandler() {
+        override fun run(success: Boolean) {
+            if (success) {
+                val accessToken = mOAuthLoginInstance?.getAccessToken(this@MainActivity)
+                val refreshToken = mOAuthLoginInstance?.getRefreshToken(this@MainActivity)
+                val expiresAt = mOAuthLoginInstance?.getExpiresAt(this@MainActivity)
+                val tokenType = mOAuthLoginInstance?.getTokenType(this@MainActivity)
+//                mOauthAT.setText(accessToken)
+//                mOauthRT.setText(refreshToken)
+//                mOauthExpires.setText(expiresAt.toString())
+//                mOauthTokenType.setText(tokenType)
+//                mOAuthState.setText(mOAuthLoginInstance.getState(this@MainActivity).toString())
+            } else {
+                val errorCode = mOAuthLoginInstance?.getLastErrorCode(this@MainActivity)?.code
+                val errorDesc = mOAuthLoginInstance?.getLastErrorDesc(this@MainActivity)
+                Toast.makeText(
+                    this@MainActivity,
+                    "errorCode:$errorCode, errorDesc:$errorDesc",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
+    }
+    private fun doNaverLogin(){
+        mOAuthLoginInstance?.startOauthLoginActivity(this@MainActivity, mOAuthLoginHandler)
     }
 
     override fun onHttpFailure() {

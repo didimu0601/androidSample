@@ -11,6 +11,8 @@ interface Constants {
         const val MSG_LOGOUT = 1
         const val MSG_MOVE_URL = 2
         const val MSG_USE_AUDIO = 3 //psg 20191014 :STT
+        const val KAKAO_NOUI_LOGIN = 4 //psg 20200219
+        const val NAVER_NOUI_LOGIN = 5 //psg 20200219
         const val SCHEME_HB_APP = "ddulotto"
         const val RELSERVER = 0
         const val DEVSERVER = 1
