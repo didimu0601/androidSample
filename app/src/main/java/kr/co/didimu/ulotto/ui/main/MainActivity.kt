@@ -31,9 +31,14 @@ import kr.co.didimu.ulotto.util.*
 import kr.co.didimu.ulotto.web.ChromeClient
 import kr.co.didimu.ulotto.web.Scheme
 import kr.co.didimu.ulotto.web.WebClient
+import org.json.JSONObject
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.net.URL
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import javax.inject.Inject
+import javax.net.ssl.HttpsURLConnection
 
 
 class MainActivity : BaseActivity(), Main.View, Handler.Callback {
@@ -153,26 +158,11 @@ class MainActivity : BaseActivity(), Main.View, Handler.Callback {
                 var nameStr = data?.getStringExtra("name")
                 var emailStr = data?.getStringExtra("email")
                 var idStr = data?.getStringExtra("kkId")
-                var fcmRealStr =   SharedPref.getInstance().getString(SharedPref.PREF_FCM_KEY_REL)
-                var fcmDevStr = SharedPref.getInstance().getString(SharedPref.PREF_FCM_KEY_DEV)
-                if(fcmRealStr == null){
-                    fcmRealStr = ""
-                }
+                if(nameStr==null) nameStr = ""
+                if(emailStr==null) emailStr = ""
+                if(idStr==null) idStr = ""
 
-                if(fcmDevStr == null){
-                    fcmDevStr = ""
-                }
-
-                val name64Str = Base64.encodeToString(nameStr?.toByteArray(), Base64.DEFAULT)
-                val email64Str = Base64.encodeToString(emailStr?.toByteArray(), Base64.DEFAULT)
-                val id64Str = Base64.encodeToString(idStr?.toByteArray(), Base64.DEFAULT)
-                val fcmDevKeyStr = Base64.encodeToString(fcmDevStr?.toByteArray(), Base64.DEFAULT)
-                val fcmRelKeyStr = Base64.encodeToString(fcmRealStr?.toByteArray(), Base64.DEFAULT)
-
-                var urlLoginParam = "${ServerType.webUrl}/_Ext/sns/kakao/kakaoLoginApp.php?userid=${id64Str}&usernm=${name64Str}&email=${email64Str}&fcmKeyReal=${fcmRelKeyStr}&fcmKeyDev=${fcmDevKeyStr}"
-
-                webview.loadUrl(urlLoginParam)
-                PrintLog.d(TAG, "login kakao  = ${urlLoginParam}")
+                afterKakaoLogin(nameStr,emailStr,idStr)
             }
         }
         else if (requestCode == Constants.REQUEST_USE_AUDIO) {// psg 20191014 STT
@@ -185,6 +175,52 @@ class MainActivity : BaseActivity(), Main.View, Handler.Callback {
         }
     }
 
+    private fun afterKakaoLogin(nameStr : String , emailStr :String , idStr:String){
+        var fcmRealStr =   SharedPref.getInstance().getString(SharedPref.PREF_FCM_KEY_REL)
+        var fcmDevStr = SharedPref.getInstance().getString(SharedPref.PREF_FCM_KEY_DEV)
+        if(fcmRealStr == null){
+            fcmRealStr = ""
+        }
+
+        if(fcmDevStr == null){
+            fcmDevStr = ""
+        }
+
+        val name64Str = Base64.encodeToString(nameStr?.toByteArray(), Base64.DEFAULT)
+        val email64Str = Base64.encodeToString(emailStr?.toByteArray(), Base64.DEFAULT)
+        val id64Str = Base64.encodeToString(idStr?.toByteArray(), Base64.DEFAULT)
+        val fcmDevKeyStr = Base64.encodeToString(fcmDevStr?.toByteArray(), Base64.DEFAULT)
+        val fcmRelKeyStr = Base64.encodeToString(fcmRealStr?.toByteArray(), Base64.DEFAULT)
+
+        var urlLoginParam = "${ServerType.webUrl}/_Ext/sns/kakao/kakaoLoginApp.php?userid=${id64Str}&usernm=${name64Str}&email=${email64Str}&fcmKeyReal=${fcmRelKeyStr}&fcmKeyDev=${fcmDevKeyStr}"
+
+        webview.loadUrl(urlLoginParam)
+        PrintLog.d(TAG, "login kakao  = ${urlLoginParam}")
+
+    }
+
+    private fun afterNaverLogin(nameStr : String , emailStr :String , idStr:String){
+        var fcmRealStr =   SharedPref.getInstance().getString(SharedPref.PREF_FCM_KEY_REL)
+        var fcmDevStr = SharedPref.getInstance().getString(SharedPref.PREF_FCM_KEY_DEV)
+        if(fcmRealStr == null){
+            fcmRealStr = ""
+        }
+
+        if(fcmDevStr == null){
+            fcmDevStr = ""
+        }
+
+        val name64Str = Base64.encodeToString(nameStr?.toByteArray(), Base64.DEFAULT)
+        val email64Str = Base64.encodeToString(emailStr?.toByteArray(), Base64.DEFAULT)
+        val id64Str = Base64.encodeToString(idStr?.toByteArray(), Base64.DEFAULT)
+        val fcmDevKeyStr = Base64.encodeToString(fcmDevStr?.toByteArray(), Base64.DEFAULT)
+        val fcmRelKeyStr = Base64.encodeToString(fcmRealStr?.toByteArray(), Base64.DEFAULT)
+
+        var urlLoginParam = "${ServerType.webUrl}/_Ext/sns/naver/naverLoginApp.php?userid=${id64Str}&usernm=${name64Str}&email=${email64Str}&fcmKeyReal=${fcmRelKeyStr}&fcmKeyDev=${fcmDevKeyStr}"
+
+        webview.loadUrl(urlLoginParam)
+        PrintLog.d(TAG, "login naver  = ${urlLoginParam}")
+    }
     // psg 20191014 STT
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when (requestCode) {
@@ -297,11 +333,9 @@ class MainActivity : BaseActivity(), Main.View, Handler.Callback {
                 val refreshToken = mOAuthLoginInstance?.getRefreshToken(this@MainActivity)
                 val expiresAt = mOAuthLoginInstance?.getExpiresAt(this@MainActivity)
                 val tokenType = mOAuthLoginInstance?.getTokenType(this@MainActivity)
-//                mOauthAT.setText(accessToken)
-//                mOauthRT.setText(refreshToken)
-//                mOauthExpires.setText(expiresAt.toString())
-//                mOauthTokenType.setText(tokenType)
-//                mOAuthState.setText(mOAuthLoginInstance.getState(this@MainActivity).toString())
+                if(accessToken != null){
+                    getNaverPofileFromHttp(accessToken)
+                }
             } else {
                 val errorCode = mOAuthLoginInstance?.getLastErrorCode(this@MainActivity)?.code
                 val errorDesc = mOAuthLoginInstance?.getLastErrorDesc(this@MainActivity)
@@ -312,8 +346,74 @@ class MainActivity : BaseActivity(), Main.View, Handler.Callback {
                 ).show()
             }
         }
+    }
+
+    private fun getNaverPofileFromHttp(accessToken:String) {
+
+        val thread = Thread {
+            println("${Thread.currentThread()} has run.")
+            var header = "Bearer " + accessToken
+
+            val mURL = URL("https://openapi.naver.com/v1/nid/me")
+            val connection: HttpsURLConnection = mURL.openConnection() as HttpsURLConnection
+
+
+            with(connection) {
+                // optional default is GET
+                requestMethod = "GET"
+
+                setRequestProperty("Authorization",header)
+
+                println("URL : $url")
+                println("Response Code : $responseCode")
+
+                BufferedReader(InputStreamReader(inputStream)).use {
+                    val response = StringBuffer()
+                    var inputLine = it.readLine()
+                    while (inputLine != null) {
+                        response.append(inputLine)
+                        inputLine = it.readLine()
+                    }
+                    it.close()
+                    println("Response : $response")
+
+                    var jsonObj = JSONObject(response.toString())
+                    if(jsonObj!=null){
+                        val retCode = jsonObj.get("resultcode")
+                        if((retCode as String).toInt() == 0){
+                            val retResponse :JSONObject = jsonObj.get("response") as JSONObject
+                            if(retResponse!=null){
+                                var idStr = retResponse.get("id")
+                                var nameStr = retResponse.get("name")
+                                var emailStr = retResponse.get("email")
+//                                val nickStr = retResponse.get("nickname")
+                                if(idStr == null) idStr = ""
+                                if(nameStr == null) nameStr = ""
+                                if(emailStr == null) emailStr = ""
+
+                                this@MainActivity.runOnUiThread(java.lang.Runnable {
+                                    afterNaverLogin(nameStr as String,emailStr as String,idStr as String)
+                                })
+
+                            }
+                        }
+                        else{
+                            this@MainActivity.runOnUiThread(java.lang.Runnable {
+                                Toast.makeText(
+                                    this@MainActivity,
+                                    "errorCode:$retCode, errorDesc:naver login failed",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            })
+                        }
+                    }
+                }
+            }
+        }
+        thread.start()
 
     }
+
     private fun doNaverLogin(){
         mOAuthLoginInstance?.startOauthLoginActivity(this@MainActivity, mOAuthLoginHandler)
     }
