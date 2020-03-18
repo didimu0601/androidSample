@@ -1,5 +1,4 @@
 package kr.co.didimu.ulotto.fcm
-
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
@@ -9,8 +8,10 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import kr.co.didimu.ulotto.BuildConfig
 import kr.co.didimu.ulotto.R
 import kr.co.didimu.ulotto.ui.main.MainActivity
+import kr.co.didimu.ulotto.util.SharedPref
 
 class HBFcmService : FirebaseMessagingService() {
 
@@ -22,8 +23,16 @@ class HBFcmService : FirebaseMessagingService() {
      */
     override fun onNewToken(token: String) {
         Log.d(TAG, "new Token: $token")
-        //sendRegistrationToServer(token)
+
+        if(token != null) {
+            if (BuildConfig.DEBUG) {
+                SharedPref.getInstance().setString(SharedPref.PREF_FCM_KEY_DEV, token)
+            } else {
+                SharedPref.getInstance().setString(SharedPref.PREF_FCM_KEY_REL, token)
+            }
+        }
     }
+
 
     /**
      * this method will be triggered every time there is new FCM Message.

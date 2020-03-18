@@ -153,18 +153,26 @@ class MainActivity : BaseActivity(), Main.View, Handler.Callback {
                 var nameStr = data?.getStringExtra("name")
                 var emailStr = data?.getStringExtra("email")
                 var idStr = data?.getStringExtra("kkId")
+                var fcmRealStr =   SharedPref.getInstance().getString(SharedPref.PREF_FCM_KEY_REL)
+                var fcmDevStr = SharedPref.getInstance().getString(SharedPref.PREF_FCM_KEY_DEV)
+                if(fcmRealStr == null){
+                    fcmRealStr = ""
+                }
+
+                if(fcmDevStr == null){
+                    fcmDevStr = ""
+                }
 
                 val name64Str = Base64.encodeToString(nameStr?.toByteArray(), Base64.DEFAULT)
                 val email64Str = Base64.encodeToString(emailStr?.toByteArray(), Base64.DEFAULT)
                 val id64Str = Base64.encodeToString(idStr?.toByteArray(), Base64.DEFAULT)
+                val fcmDevKeyStr = Base64.encodeToString(fcmDevStr?.toByteArray(), Base64.DEFAULT)
+                val fcmRelKeyStr = Base64.encodeToString(fcmRealStr?.toByteArray(), Base64.DEFAULT)
 
-//                    webview.loadUrl("${ServerType.webUrl}searchresult?q=${matches?.get(0)}")
-//                var urlLoginParam = "${ServerType.webUrl}/_Ext/sns/kakao/kakaoLogin.php?userid=${idStr}&usernm=${nameStr}&email=${emailStr}"
-                var urlLoginParam = "${ServerType.webUrl}/_Ext/sns/kakao/kakaoLoginApp.php?userid=${id64Str}&usernm=${name64Str}&email=${email64Str}"
+                var urlLoginParam = "${ServerType.webUrl}/_Ext/sns/kakao/kakaoLoginApp.php?userid=${id64Str}&usernm=${name64Str}&email=${email64Str}&fcmKeyReal=${fcmRelKeyStr}&fcmKeyDev=${fcmDevKeyStr}"
 
                 webview.loadUrl(urlLoginParam)
                 PrintLog.d(TAG, "login kakao  = ${urlLoginParam}")
-//              http://ulotto.didimu.co.kr/_Ext/sns/kakao/kakaoLogin.php?userid=aaa&usernm=aaa&email=aaa
             }
         }
         else if (requestCode == Constants.REQUEST_USE_AUDIO) {// psg 20191014 STT

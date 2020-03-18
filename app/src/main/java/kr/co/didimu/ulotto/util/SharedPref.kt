@@ -23,6 +23,9 @@ class SharedPref(context: Context) {
         const val PREF_IS_SHOW_UPDATE_BUTTON = "PREF_IS_SHOW_UPDATE_BUTTON"
         //20191022 psg : biologin btn pressed initailly
         const val PREF_BIOMETRICS_DIRECT_PRESS_START ="PREF_BIOMETRICS_DIRECT_PRESS_START"
+        const val PREF_FCM_KEY_DEV ="PREF_FCM_KEY_DEV"
+        const val PREF_FCM_KEY_REL ="PREF_FCM_KEY_REL"
+
 
         @Volatile private lateinit var instance: SharedPref
 
