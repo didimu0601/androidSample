@@ -287,12 +287,12 @@ class MainActivity : BaseActivity(), Main.View, Handler.Callback {
                 }
             }
 
-            Constants.MSG_USE_AUDIO -> { //psg 20191014 :STT
-                PrintLog.d(TAG, "MSG_USE_AUDIO")
-                ActivityCompat.requestPermissions(this@MainActivity,
-                    PermissionType.AUDIO.getPermissionList(),
-                    Constants.PERMISSION_AUDIO)
-            }
+//            Constants.MSG_USE_AUDIO -> { //psg 20191014 :STT
+//                PrintLog.d(TAG, "MSG_USE_AUDIO")
+//                ActivityCompat.requestPermissions(this@MainActivity,
+//                    PermissionType.AUDIO.getPermissionList(),
+//                    Constants.PERMISSION_AUDIO)
+//            }
 
             Constants.NAVER_NOUI_LOGIN -> { //naver login
                 PrintLog.d(TAG, "naver Login")
