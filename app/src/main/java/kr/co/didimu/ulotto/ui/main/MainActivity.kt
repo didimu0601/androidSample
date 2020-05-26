@@ -384,8 +384,25 @@ class MainActivity : BaseActivity(), Main.View, Handler.Callback {
                             val retResponse :JSONObject = jsonObj.get("response") as JSONObject
                             if(retResponse!=null){
                                 var idStr = retResponse.get("id")
-                                var nameStr = retResponse.get("name")
-                                var emailStr = retResponse.get("email")
+                                var nameStr = ""
+                                try {
+                                    val nameObj = retResponse.get("name")
+                                    if(nameObj!=null){
+                                        nameStr = nameObj as String
+                                    }
+
+                                } catch (e: Exception) {
+                                    //e.printStackTrace()
+                                }
+                                var emailStr = ""
+                                try {
+                                    val emailObj = retResponse.get("email")
+                                    if(emailObj!=null){
+                                        emailStr = emailObj as String
+                                    }
+                                } catch (e: Exception) {
+                                    //e.printStackTrace()
+                                }
 //                                val nickStr = retResponse.get("nickname")
                                 if(idStr == null) idStr = ""
                                 if(nameStr == null) nameStr = ""
