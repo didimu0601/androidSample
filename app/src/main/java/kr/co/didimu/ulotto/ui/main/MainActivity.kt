@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
@@ -13,8 +14,11 @@ import android.util.Base64
 import android.util.Log
 import android.view.ViewGroup
 import android.webkit.CookieManager
+import android.webkit.ValueCallback
+import android.webkit.WebChromeClient
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import com.nhn.android.naverlogin.OAuthLogin
@@ -49,6 +53,10 @@ class MainActivity : BaseActivity(), Main.View, Handler.Callback {
 
     // 사용자권한 확인이 필요한경우 설정
     private val m_bUseCheckTerms = false
+
+    // file upload
+    var mUploadMessage: ValueCallback<Uri>? = null
+    var uploadMessage: ValueCallback<Array<Uri>>? = null
 
     @Inject
     override lateinit var presenter: Main.Presenter
@@ -95,7 +103,9 @@ class MainActivity : BaseActivity(), Main.View, Handler.Callback {
             for (signature in info.signatures) {
                 val md = MessageDigest.getInstance("SHA")
                 md.update(signature.toByteArray())
-                Log.e("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT))
+                val tkeyHash : String = Base64.encodeToString(md.digest(), Base64.DEFAULT)
+                Log.e("KeyHash:", tkeyHash)
+//                Toast.makeText(baseContext, "KeyHash:"+ tkeyHash, Toast.LENGTH_SHORT).show()
             }
         } catch (e: PackageManager.NameNotFoundException) {
             e.printStackTrace()
@@ -105,6 +115,26 @@ class MainActivity : BaseActivity(), Main.View, Handler.Callback {
 
         initNaverData()
 
+        var  tSwipe : SwipeRefreshLayout = findViewById(R.id.swiperefresh)
+        tSwipe.setOnRefreshListener {
+            Log.i(TAG, "onRefresh called from SwipeRefreshLayout")
+
+            // This method performs the actual data-refresh operation.
+            // The method calls setRefreshing(false) when it's finished.
+            myUpdateOperation()
+        }
+    }
+
+    private fun myUpdateOperation() {
+        webview.reload()
+        var  tSwipe :SwipeRefreshLayout = findViewById(R.id.swiperefresh)
+        tSwipe.setRefreshing(true);
+
+    }
+
+    private fun onPageReloadFinished() {
+        var  tSwipe :SwipeRefreshLayout = findViewById(R.id.swiperefresh)
+        tSwipe.setRefreshing(false);
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -172,6 +202,22 @@ class MainActivity : BaseActivity(), Main.View, Handler.Callback {
             if (!TextUtils.isEmpty(matches?.get(0))) {
                 webview.loadUrl("${ServerType.webUrl}searchresult?q=${matches?.get(0)}")
             }
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (requestCode === Constants.REQUEST_SELECT_FILE) {
+                if (uploadMessage == null)
+                    return
+                print("result code = " + resultCode)
+                var results: Array<Uri>? = WebChromeClient.FileChooserParams.parseResult(resultCode, data)
+                uploadMessage?.onReceiveValue(results)
+                uploadMessage = null
+            }
+        } else if (requestCode === Constants.FILECHOOSER_RESULTCODE) {
+            if (null == mUploadMessage)
+                return
+            val result = if (intent == null || resultCode !== RESULT_OK) null else intent.data
+            mUploadMessage?.onReceiveValue(result)
+            mUploadMessage = null
         }
     }
 
@@ -250,6 +296,11 @@ class MainActivity : BaseActivity(), Main.View, Handler.Callback {
                 SharedPref.getInstance().setBoolean(SharedPref.PREF_IS_FIRST_COMPLETE, true)
                 handleIntent(intent)
                 layout_main.removeView(introSplashView)
+            }
+
+            Constants.MSG_PAGELOAD_FINISHED -> {
+                PrintLog.d(TAG, "MSG_PAGELOAD_FINISHED")
+                onPageReloadFinished()
             }
 
             Constants.MSG_LOGOUT -> {

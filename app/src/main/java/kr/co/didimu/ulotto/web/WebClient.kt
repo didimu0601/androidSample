@@ -32,6 +32,11 @@ class WebClient: WebViewClient() {
             msg.what = Constants.MSG_SPLASH_FINISHED
             MessageHandler(view?.context, view?.context as Handler.Callback).sendMessage(msg)
         }
+        else{
+            val msg = Message.obtain()
+            msg.what = Constants.MSG_PAGELOAD_FINISHED
+            MessageHandler(view?.context, view?.context as Handler.Callback).sendMessage(msg)
+        }
     }
 
     override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {

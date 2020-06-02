@@ -10,9 +10,11 @@ interface Constants {
         const val MSG_SPLASH_FINISHED = 0
         const val MSG_LOGOUT = 1
         const val MSG_MOVE_URL = 2
-        const val MSG_USE_AUDIO = 3 //psg 20191014 :STT
-        const val KAKAO_NOUI_LOGIN = 4 //psg 20200219
-        const val NAVER_NOUI_LOGIN = 5 //psg 20200219
+        const val MSG_USE_AUDIO = 3
+        const val MSG_PAGELOAD_FINISHED = 4
+        const val MSG_PAGELOAD_ERROR = 5
+        const val KAKAO_NOUI_LOGIN = 6 //psg 20200219
+        const val NAVER_NOUI_LOGIN = 7 //psg 20200219
         const val SCHEME_HB_APP = "ddulotto"
         const val RELSERVER = 0
         const val DEVSERVER = 1
@@ -30,6 +32,8 @@ interface Constants {
         const val REQUEST_LOGIN = 0
         const val REQUEST_USE_AUDIO = 1 //psg 20191014 :STT
         const val REQUEST_KAKAO_NOUI_LOGIN = 2 //psg 20200227
+        const val REQUEST_SELECT_FILE = 3
+        const val FILECHOOSER_RESULTCODE = 4
 
         const val PROMPT_ERROR_TEMPOLARYLOCK = 7
         const val PROMPT_ERROR_PERMANENTLOCK = 9
