@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/androidSample.iml" filepath="$PROJECT_DIR$/androidSample.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/naveridlogin_android_sdk_4.2.6/naveridlogin_android_sdk_4.2.6.iml" filepath="$PROJECT_DIR$/naveridlogin_android_sdk_4.2.6/naveridlogin_android_sdk_4.2.6.iml" />
     </modules>
   </component>
 </project>
