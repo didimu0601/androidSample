@@ -145,18 +145,10 @@ class MainActivity : BaseActivity(), Main.View, Handler.Callback {
     }
 
     override fun onBackPressed() {
-        if (webview?.canGoBack() == true)
-        {
-            var weburl : String? = webview?.getUrl()
-            if( weburl != null && !weburl?.equals(ServerType.webUrl,true)){
-                webview.goBack()
-                return
-            }
+        if (webview?.canGoBack() == true) {
+            webview.goBack()
+            return
         }
-//        if (webview?.canGoBack() == true) {
-//            webview.goBack()
-//            return
-//        }
         super.onBackPressed()
     }
 
