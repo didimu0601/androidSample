@@ -12,8 +12,8 @@ android {
         applicationId "kr.co.didimu.ulotto"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 20052602
-        versionName "1.0.3"
+        versionCode 20090401
+        versionName "1.0.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
